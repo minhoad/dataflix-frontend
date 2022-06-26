@@ -24,6 +24,17 @@
       </v-row>
       <v-row>
         <v-col sm="5">
+          <v-text-field
+            class=""
+            v-model="email"
+            :rules="emailRules"
+            label="E-mail*"
+            required
+         ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col sm="5">
           <v-btn
             class="ml-4"
             color="primary"
@@ -31,15 +42,7 @@
             large
             raised
             @click="login">
-            Login
-          </v-btn>
-          <v-btn
-            class="ml-3"
-            type="button"
-            variant="outline-secondary"
-            large
-            @click="register">
-            Não tenho uma conta
+            Cadastrar
           </v-btn>
         </v-col>
       </v-row>
@@ -50,7 +53,7 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'FormLogin',
+  name: 'FormCadastro',
   components: {
   },
   data: () => ({
@@ -79,7 +82,6 @@ export default Vue.extend({
     login(){
     },
     register(){
-      this.$router.push('/cadastro')
     }
   }
 

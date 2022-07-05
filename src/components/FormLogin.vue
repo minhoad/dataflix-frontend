@@ -26,6 +26,22 @@
           </v-col>
         </v-row>
       </v-card>
+      <v-snackbar
+      v-model="snackbar"
+    >
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="primary"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
     </v-form>
   </v-container>
 </template>
@@ -40,6 +56,7 @@ export default Vue.extend({
     DataflixApp
   },
   data: () => ({
+    urlLogin: 'http://localhost:8080/api/login/validate/',
     valid: false,
     usuario: '',
     senha: '',
@@ -55,6 +72,16 @@ export default Vue.extend({
       (v: any) => !!v || 'E-mail é obrigatório',
       (v: string) => /.+@.+/.test(v) || 'E-mail inválido',
     ],
+    usuarioRetorno: {
+      id: 0,
+      nome: "",
+      email: "",
+      senha: "",
+      planoIsAtivo: false,
+      tipoPlanoId: null
+    },
+    snackbar: false,
+    text: ''
   }),
   methods: {
     clear() {
@@ -63,6 +90,17 @@ export default Vue.extend({
       this.senha = ''
     },
     login() {
+      axios
+      .get(this.urlLogin+this.usuario+"/"+this.senha)
+      .then((res) => {
+           this.usuarioRetorno = res.data;
+           console.log(res);
+           this.$router.push('/planos/'+this.usuarioRetorno.id);
+         }).catch((error) => {
+          this.text = 'Erro ao realizar cadastro!';
+          this.snackbar = true;
+          console.log(error);
+         });
     },
     register() {
       this.$router.push('/cadastro')

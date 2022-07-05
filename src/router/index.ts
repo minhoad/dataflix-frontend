@@ -18,12 +18,12 @@ const routes: Array<RouteConfig> = [
     component: FormCadastro
   },
   {
-    path: '/planos',
+    path: '/planos/:id',
     name: 'planos',
     component: FormPlanos
   },
   {
-    path: '/historico',
+    path: '/historico/:id',
     name: 'historico',
     component: FormHistorico
   }

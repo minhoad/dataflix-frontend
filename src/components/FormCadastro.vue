@@ -22,8 +22,11 @@
         </v-row>
         <v-row>
           <v-col class="text-center">
-            <v-btn class="mx-auto" color="primary" elevation="2" large raised @click="register">
+            <v-btn class="mr-auto" color="primary" elevation="2" large raised @click="register">
               Cadastrar
+            </v-btn>
+            <v-btn class="mx-auto ml-7" type="button" variant="outline-secondary" large @click="retornar">
+              Retornar
             </v-btn>
           </v-col>
         </v-row>
@@ -75,7 +78,15 @@ export default Vue.extend({
       (v: string) => /.+@.+/.test(v) || 'E-mail inválido',
     ],
     snackbar: false,
-    text: ''
+    text: '',
+    usuarioRetorno: {
+      id: 0,
+      nome: "",
+      email: "",
+      senha: "",
+      planoIsAtivo: false,
+      tipoPlanoId: null
+    }
   }),
   methods: {
     clear() {
@@ -83,15 +94,15 @@ export default Vue.extend({
       this.user.usuario = ''
       this.user.senha = ''
     },
-    login() {
-
+    retornar() {
+      this.$router.push('/login')
     },
     register() {
       axios
       .post(this.urlCadastro, this.user)
       .then((res) => {
-           this.retorno = res.data;
-           this.text = res.data;
+           this.usuarioRetorno = res.data;
+           this.text = 'Usuário criado com sucesso!';
            this.snackbar = true;
            this.$router.push('/login')
          }).catch((error) => {

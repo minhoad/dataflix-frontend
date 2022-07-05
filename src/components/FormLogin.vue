@@ -32,6 +32,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import DataflixApp from '@/components/DataflixApp.vue'
+import axios from 'axios'
 
 export default Vue.extend({
   name: 'FormLogin',

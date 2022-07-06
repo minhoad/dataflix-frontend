@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import FormLogin from '../views/FormLogin.vue'
 import FormCadastro from '../views/FormCadastro.vue'
+import Filmes from '../views/Filmes.vue'
+
 
 Vue.use(VueRouter)
 
@@ -15,6 +17,11 @@ const routes: Array<RouteConfig> = [
     path: '/cadastro',
     name: 'cadastro',
     component: FormCadastro
+  },
+  {
+    path: '/filmes',
+    name: 'filmes',
+    component: Filmes
   }
 ]
 

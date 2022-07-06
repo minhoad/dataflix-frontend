@@ -62,7 +62,7 @@ export default Vue.extend({
     DataflixApp
   },
   data: () => ({
-    urlCadastro: 'http://localhost:8080/api/usuario/create-user',
+    urlCadastro: 'http://localhost:8080/api/usuario',
     valid: false,
     user: {usuario: '', senha: '', email: ''},
     retorno: {},

@@ -276,7 +276,7 @@ export default Vue.extend({
   name: "Planos",
   data: function () {
     return {
-      urlCadastro: "http://localhost:8080/api/usuario/create-user",
+      urlUsuario: "http://localhost:8080/api/usuario/",
       button1Checked: "grey",
       button2Checked: "grey",
       button3Checked: "grey",
@@ -289,6 +289,15 @@ export default Vue.extend({
       text: "",
       retorno: {},
       confere: false,
+      usuarioRetorno: {
+        id: 0,
+        nome: "",
+        email: "",
+        senha: "",
+        planoIsAtivo: false,
+        tipoPlanoId: 0
+      },
+      selectedButton: 0
     };
   },
   methods: {
@@ -317,20 +326,25 @@ export default Vue.extend({
         this.button3Checked = this.cinza;
         this.button4Checked = this.primary;
       }
+      this.selectedButton = index;
       this.confere = true;
     },
     Confirmar() {
       if (this.confere) {
+        this.usuarioRetorno.tipoPlanoId = this.selectedButton;
+        console.log(this.usuarioRetorno);
         axios
-          .post(this.urlCadastro) // tem q colocar this.user
+          .post(this.urlUsuario, this.usuarioRetorno)
           .then((res) => {
             this.retorno = res.data;
             this.text = res.data;
             this.snackbar = true;
-            this.$router.push("/login");
+            this.text = "Plano escolhido com sucesso!";
+            console.log(this.retorno);
+            //this.$router.push("/filmes");
           })
           .catch((e) => {
-            this.text = "Plano escolhido com sucesso!";
+            this.text = "Erro ao escolher plano!";
             this.snackbar = true;
             console.log(e);
           });
@@ -345,9 +359,22 @@ export default Vue.extend({
     AtivarSnack() {
       this.snackbar1 = false;
     },
+    BuscarUsuario() {
+      axios
+      .get(this.urlUsuario+this.$route.params.id)
+      .then((res) => {
+           this.usuarioRetorno = res.data;
+           console.log(this.usuarioRetorno);
+         }).catch((error) => {
+          console.log(error);
+         });
+    }
   },
   components: {
     DataflixAppVue,
   },
+  mounted() {
+    this.BuscarUsuario();
+  }
 });
 </script>

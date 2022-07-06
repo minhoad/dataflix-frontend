@@ -94,7 +94,7 @@ export default Vue.extend({
       .get(this.urlLogin+this.usuario+"/"+this.senha)
       .then((res) => {
            this.usuarioRetorno = res.data;
-           console.log(res);
+           console.log(this.usuario);
            this.$router.push('/planos/'+this.usuarioRetorno.id);
          }).catch((error) => {
           this.text = 'Erro ao realizar cadastro!';

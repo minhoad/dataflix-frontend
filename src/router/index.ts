@@ -5,6 +5,8 @@ import FormCadastro from '../views/FormCadastro.vue'
 import Filmes from '../views/Filmes.vue'
 
 
+import FormPlanos from '../views/FormPlanos.vue'
+import FormHistorico from '../views/FormHistorico.vue'
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -22,6 +24,16 @@ const routes: Array<RouteConfig> = [
     path: '/filmes',
     name: 'filmes',
     component: Filmes
+  },
+  {
+    path: '/planos/:id',
+    name: 'planos',
+    component: FormPlanos
+  },
+  {
+    path: '/historico/:id',
+    name: 'historico',
+    component: FormHistorico
   }
 ]
 

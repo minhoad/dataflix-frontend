@@ -92,43 +92,23 @@ export default Vue.extend({
     data: () => ({
         loading: false,
         selection: 1,
-        filmes: [
-            {
-                id: 1,
-                nomeFilme: "Stranger Things",
-                duracao: "127",
-                idGenero: 1,
-                idImagem: "https://lojapiticas.vteximg.com.br/arquivos/ids/166655/brands-strangerthings2.png",
-                descricao: "When a little boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.",
-                tipoPlanoId: 1,
-                classificacao: "16 anos"
-            },
-            {
-                id: 2,
-                nomeFilme: "The Boys",
-                duracao: "158",
-                idGenero: 1,
-                idImagem: "https://images2.alphacoders.com/111/1116548.png",
-                descricao: "The Boys is set in a universe in which superpowered people are recognized as heroes by the general public and owned by a powerful corporation, Vought International, which ensures that they are aggressively marketed and monetized. Outside of their heroic personas, most are arrogant and corrupt.",
-                tipoPlanoId: 1,
-                classificacao: "18 anos"
-            }
-        ]
+        filmes: []
     }),
 
     methods: {
         loadFilmes() {
             axios
-                .get("http://localhost:8080/api/filmes")
+                .get("http://localhost:8080/api/filmes/")
                 .then((res) => {
                     this.filmes = res.data;
+                    console.log(this.filmes)
                 }).catch((error) => {
                     console.log(error);
                 });
         }
     },
     mounted() {
-        this.loadFilmes()
+        this.loadFilmes();
     }
 })
 </script>

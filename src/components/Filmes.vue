@@ -5,9 +5,8 @@
             <v-row>
                 <div id="filme" v-for="filme in filmes" class="mx-auto my-12">
                     <v-card class="mx-auto my-12" max-width="374">
-            
-                        <v-img height="250"
-                            :src="filme.idImagem">
+
+                        <v-img height="250" :src="filme.idImagem">
                         </v-img>
 
                         <v-card-title>
@@ -46,11 +45,11 @@
                             </v-row>
 
                             <div class="my-3 text-subtitle-1">
-                                {{filme.idGenero}}
+                                {{ filme.idGenero }}
                             </div>
 
                             <div class="my-4 text-subtitle-1" style="height: 200px">
-                                {{filme.descricao}}
+                                {{ filme.descricao }}
                             </div>
                         </v-card-text>
 
@@ -58,14 +57,8 @@
 
                         <v-card-text>
                             <v-row justify="space-around">
-                               <v-btn
-                                    color="primary"
-                                    class="ma-2 white--text"
-                                    >
-                                    <v-icon
-                                        left
-                                        dark
-                                    >
+                                <v-btn color="primary" class="ma-2 white--text" @click="watch(filme.id)">
+                                    <v-icon left dark>
                                         mdi-play
                                     </v-icon>
                                     Watch now
@@ -90,9 +83,18 @@ export default Vue.extend({
         DataflixApp
     },
     data: () => ({
+        urlUsuario: "http://localhost:8080/api/usuario/",
         loading: false,
         selection: 1,
-        filmes: []
+        filmes: [],
+        usuarioRetorno: {
+        id: 0,
+        nome: "",
+        email: "",
+        senha: "",
+        planoIsAtivo: false,
+        tipoPlanoId: 0
+      }
     }),
 
     methods: {
@@ -105,10 +107,30 @@ export default Vue.extend({
                 }).catch((error) => {
                     console.log(error);
                 });
+        },
+        BuscarUsuario() {
+            axios
+                .get(this.urlUsuario + this.$route.params.id)
+                .then((res) => {
+                    this.usuarioRetorno = res.data;
+                    console.log(this.usuarioRetorno);
+                }).catch((error) => {
+                    console.log(error);
+                });
+        },
+        watch(filmeId: any) {
+            axios
+                .post("http://localhost:8080/api/historico/" + this.usuarioRetorno.id + "/" +filmeId)
+                .then((res) => {
+                    console.log(res)
+                }).catch((error) => {
+                    console.log(error);
+                });
         }
     },
     mounted() {
         this.loadFilmes();
+        this.BuscarUsuario();
     }
 })
 </script>

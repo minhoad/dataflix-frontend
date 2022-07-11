@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <dataflix-app-vue></dataflix-app-vue>
+    <dataflix-app-vue v-bind:usuarioNome=usuarioRetorno.nome></dataflix-app-vue>
     <v-row class="my-5"></v-row>
     <div>
       <h1 class="my-10">Escolha o melhor plano para você</h1>
@@ -39,7 +39,7 @@
 
             <v-row>
               <v-progress-linear color="black" class="mb-5"></v-progress-linear>
-              <h3 class="mb-5">cancele quando quiser</h3>
+              <h3 class="mb-5">Cancele quando quiser</h3>
             </v-row>
 
             <v-row>
@@ -169,11 +169,11 @@
             <v-progress-linear color="black"></v-progress-linear>
           </v-col>
           <v-col>
-            <v-icon color="black">mdi-numeric-2</v-icon>
+            <v-icon color="black">mdi-check-bold</v-icon>
             <v-progress-linear color="black" class="mt-5"></v-progress-linear>
           </v-col>
           <v-col>
-            <v-icon color="black">mdi-check-bold</v-icon>
+            <v-icon color="black">mdi-numeric-3</v-icon>
             <v-progress-linear color="black" class="mt-5"></v-progress-linear>
           </v-col>
           <v-col>
@@ -221,7 +221,7 @@
             <v-progress-linear color="black" class="mt-5"></v-progress-linear>
           </v-col>
           <v-col>
-            <v-icon color="black">mdi-numeric-3</v-icon>
+            <v-icon color="black">mdi-numeric-4</v-icon>
             <v-progress-linear color="black" class="mt-5"></v-progress-linear>
           </v-col>
           <v-col>
@@ -367,7 +367,7 @@ export default Vue.extend({
            console.log(this.usuarioRetorno);
          }).catch((error) => {
           console.log(error);
-         });
+         });  
     }
   },
   components: {

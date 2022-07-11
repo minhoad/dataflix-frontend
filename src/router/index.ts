@@ -21,7 +21,7 @@ const routes: Array<RouteConfig> = [
     component: FormCadastro
   },
   {
-    path: '/filmes',
+    path: '/filmes/:id',
     name: 'filmes',
     component: Filmes
   },

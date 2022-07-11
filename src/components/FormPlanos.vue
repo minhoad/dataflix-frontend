@@ -341,7 +341,7 @@ export default Vue.extend({
             this.snackbar = true;
             this.text = "Plano escolhido com sucesso!";
             console.log(this.retorno);
-            //this.$router.push("/filmes");
+            this.$router.push("/filmes/"+this.usuarioRetorno.id);
           })
           .catch((e) => {
             this.text = "Erro ao escolher plano!";

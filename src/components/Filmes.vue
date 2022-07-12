@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <dataflix-app bind></dataflix-app>
+        <dataflix-app></dataflix-app>
         <v-item-group multiple>
             <v-row>
                 <div id="filme" v-for="filme in filmes" class="mx-auto my-12">
@@ -44,13 +44,15 @@
                                 </div>
                             </v-row>
 
-                            <div class="my-3 text-subtitle-1">
-                                {{ filme.idGenero }}
-                            </div>
-
-                            <div class="my-4 text-subtitle-1" style="height: 200px">
-                                {{ filme.descricao }}
-                            </div>
+                            <v-row class="mx-auto">
+                                <v-text>
+                                    Descrição:
+                                </v-text>
+                                </v-row>
+                                <div class="my-4 text-subtitle-1" style="height: 200px">
+                                    {{ filme.descricao }}
+                                </div>
+                            
                         </v-card-text>
 
                         <v-divider class="mx-4"></v-divider>
@@ -100,7 +102,7 @@ export default Vue.extend({
     methods: {
         loadFilmes() {
             axios
-                .get("http://localhost:8080/api/filmes/" + this.usuarioRetorno.id )
+                .get("http://localhost:8080/api/filmes")
                 .then((res) => {
                     this.filmes = res.data;
                     console.log(this.filmes)
@@ -120,7 +122,7 @@ export default Vue.extend({
         },
         watch(filmeId: any) {
             axios
-                .post("http://localhost:8080/api/historico/" + this.usuarioRetorno.id + "/" +filmeId)
+                .post("http://localhost:8080/api/historico/" + this.usuarioRetorno.id + "/" + filmeId + "/" + "0")
                 .then((res) => {
                     console.log(res)
                 }).catch((error) => {

@@ -5,7 +5,7 @@
     <div>
       <v-row class="mt-5">
         <v-col class="mt-15 ml-10">
-          <h2 class="mb-3">Historico de filmes</h2>
+          <h2 class="mb-3">Continuar assistindo</h2>
           <v-progress-linear color="black" class="mb-3" length="100px"></v-progress-linear>
         </v-col>
       </v-row>
@@ -20,7 +20,7 @@
                 </h3>
                 <v-row class="mt-3"></v-row>
                 <v-row>
-                  <v-btn color="black" class="mx-auto" @click="watch(historico.idFilme)">
+                  <v-btn color="black" class="mx-auto" @click="watch(historico.idFilme, historico.id)">
                     <v-icon x-large color="primary">mdi-play-circle</v-icon>
                   </v-btn>
                 </v-row>
@@ -80,9 +80,9 @@ export default Vue.extend({
           console.log(error);
         });
     },
-    watch(idFilme: any) {
+    watch(idFilme: any, idHistorico: any) {
             axios
-                .post("http://localhost:8080/api/historico/" + this.usuarioRetorno.id + "/" +idFilme)
+                .post("http://localhost:8080/api/historico/" + this.usuarioRetorno.id + "/" +idFilme+ "/" +idHistorico)
                 .then((res) => {
                     console.log(res)
                 }).catch((error) => {

@@ -6,7 +6,7 @@
       <v-card class="mx-auto my-12" max-width="500">
         <v-row class="mx-auto">
           <v-col>
-            <v-text-field v-model="user.usuario" :rules="usuarioRules" :counter="50" label="Usuário*" required>
+            <v-text-field v-model="user.nome" :rules="usuarioRules" :counter="50" label="Usuário*" required>
             </v-text-field>
           </v-col>
         </v-row>
@@ -62,9 +62,9 @@ export default Vue.extend({
     DataflixApp
   },
   data: () => ({
-    urlCadastro: 'http://localhost:8080/api/usuario',
+    urlCadastro: 'http://localhost:8080/api/usuario/',
     valid: false,
-    user: {usuario: '', senha: '', email: ''},
+    user: {nome: '', senha: '', email: ''},
     retorno: {},
     usuarioRules: [
       (v: any) => !!v || 'Usuário é obrigatório',
@@ -80,7 +80,6 @@ export default Vue.extend({
     snackbar: false,
     text: '',
     usuarioRetorno: {
-      id: 0,
       nome: "",
       email: "",
       senha: "",
@@ -91,7 +90,7 @@ export default Vue.extend({
   methods: {
     clear() {
       this.user.email = ''
-      this.user.usuario = ''
+      this.user.nome = ''
       this.user.senha = ''
     },
     retornar() {
@@ -108,7 +107,6 @@ export default Vue.extend({
          }).catch((error) => {
           this.text = 'Erro ao realizar cadastro!';
           this.snackbar = true;
-          this.clear()
           console.log(error);
          });
     }

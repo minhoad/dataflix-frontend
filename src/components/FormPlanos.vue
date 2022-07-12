@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <dataflix-app-vue v-bind:usuarioNome=usuarioRetorno.nome></dataflix-app-vue>
+    <dataflix-app-vue></dataflix-app-vue>
     <v-row class="my-5"></v-row>
     <div>
       <h1 class="my-10">Escolha o melhor plano para você</h1>

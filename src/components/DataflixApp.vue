@@ -27,28 +27,67 @@
 
         <v-list-item-content
           >
-          <v-list-item-title>{{usuarioNome}}</v-list-item-title>
+          <v-list-item-title>{{ usuarioRetorno.nome }}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
 
       <v-divider></v-divider>
 
       <v-list dense>
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            link
-            :to="item.path"
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+          <v-btn depressed :to="'/login/'">
+          <v-list-item>
+            <v-list-item-icon grid>
+              <v-icon>mdi-account</v-icon>
             </v-list-item-icon>
-
             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title >Login</v-list-item-title>
             </v-list-item-content>
-          
           </v-list-item>
+          </v-btn>
+
+          <v-btn depressed :to="'/cadastro/'">
+          <v-list-item>
+            <v-list-item-icon grid>
+              <v-icon>mdi-key</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title >Cadastro</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          </v-btn>
+
+          <v-btn depressed :to="'/planos/'+usuarioRetorno.id">
+          <v-list-item>
+            <v-list-item-icon grid>
+              <v-icon>mdi-view-dashboard</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title >Planos</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          </v-btn>
+
+          <v-btn depressed :to="'/filmes/'+usuarioRetorno.id">
+          <v-list-item>
+            <v-list-item-icon grid>
+              <v-icon>mdi-movie</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title >Filmes</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          </v-btn>
+          
+          <v-btn depressed :to="'/historico/'+usuarioRetorno.id">
+          <v-list-item>
+            <v-list-item-icon grid>
+              <v-icon>mdi-clock</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title >Histórico</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          </v-btn>
       </v-list>
     </v-navigation-drawer>
     </v-container>
@@ -56,28 +95,41 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import axios from 'axios'
+import axios from "axios";
 
 export default Vue.extend({
   name: 'DataflixApp',
-  props: ['usuarioNome'],
   data: () => ({
     drawer: false,
-    items: [
-          { path: '/login', title: 'Login', icon: 'mdi-account' },
-          { path: '/cadastro', title: 'Cadastro', icon: 'mdi-key' },
-          { path: '/planos/1', title: 'Planos', icon: 'mdi-view-dashboard' },
-          { path: '/filmes', title: 'Filmes', icon: 'mdi-movie' },
-          { path: '/historico/1', title: 'Histórico', icon: 'mdi-clock' },
-    ],
-    usuario: ""
+    urlUsuario: "http://localhost:8080/api/usuario/",
+    usuarioRetorno: {
+        id: 0,
+        nome: "",
+        email: "",
+        senha: "",
+        planoIsAtivo: false,
+        tipoPlanoId: 0
+      }
   }),
   methods: {
+    BuscarUsuario() {
+      axios
+      .get(this.urlUsuario+this.$route.params.id)
+      .then((res) => {
+           this.usuarioRetorno = res.data;
+           console.log(this.usuarioRetorno);
+         }).catch((error) => {
+          console.log(error);
+         });  
+    }
   },
   watch: {
       group () {
         this.drawer = false
       },
   },
+  mounted() {
+    this.BuscarUsuario();
+  }
 })
 </script>

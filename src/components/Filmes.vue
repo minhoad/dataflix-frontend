@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <dataflix-app></dataflix-app>
+        <dataflix-app bind></dataflix-app>
         <v-item-group multiple>
             <v-row>
                 <div id="filme" v-for="filme in filmes" class="mx-auto my-12">
@@ -88,19 +88,19 @@ export default Vue.extend({
         selection: 1,
         filmes: [],
         usuarioRetorno: {
-        id: 0,
-        nome: "",
-        email: "",
-        senha: "",
-        planoIsAtivo: false,
-        tipoPlanoId: 0
-      }
+            id: 0,
+            nome: "",
+            email: "",
+            senha: "",
+            planoIsAtivo: false,
+            tipoPlanoId: 0
+        }
     }),
 
     methods: {
         loadFilmes() {
             axios
-                .get("http://localhost:8080/api/filmes/")
+                .get("http://localhost:8080/api/filmes/" + this.usuarioRetorno.id )
                 .then((res) => {
                     this.filmes = res.data;
                     console.log(this.filmes)

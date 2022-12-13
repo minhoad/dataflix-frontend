@@ -6,7 +6,7 @@
     dark
     >
     <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-    <v-app-bar-title>Dataflix</v-app-bar-title>
+    <v-app-bar-title>Health Clinic</v-app-bar-title>
     <v-spacer></v-spacer>
     <v-btn icon>
       <v-icon>mdi-magnify</v-icon>
@@ -54,40 +54,31 @@
               <v-list-item-title >Cadastro</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          </v-btn>
-
-          <v-btn depressed :to="'/planos/'+usuarioRetorno.id">
+        </v-btn>
+        <v-btn depressed :to="'/fotos/'">
           <v-list-item>
             <v-list-item-icon grid>
-              <v-icon>mdi-view-dashboard</v-icon>
+              <v-icon>mdi-domain</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title >Planos</v-list-item-title>
+              <v-list-item-title >Fotos</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          </v-btn>
-
-          <v-btn depressed :to="'/filmes/'+usuarioRetorno.id">
+        </v-btn>
+        <v-btn depressed :to="'/Home/'">
           <v-list-item>
             <v-list-item-icon grid>
-              <v-icon>mdi-movie</v-icon>
+              <v-icon small>home</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title >Filmes</v-list-item-title>
+              <v-list-item-title >Home</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          </v-btn>
+        </v-btn>
+
           
-          <v-btn depressed :to="'/historico/'+usuarioRetorno.id">
-          <v-list-item>
-            <v-list-item-icon grid>
-              <v-icon>mdi-clock</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title >Histórico</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          </v-btn>
+
+          
       </v-list>
     </v-navigation-drawer>
     </v-container>

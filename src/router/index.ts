@@ -2,11 +2,9 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import FormLogin from '../views/FormLogin.vue'
 import FormCadastro from '../views/FormCadastro.vue'
-import Filmes from '../views/Filmes.vue'
+import Home from '../views/Home.vue'
+import GridFotos from '../views/GridFotos.vue'
 
-
-import FormPlanos from '../views/FormPlanos.vue'
-import FormHistorico from '../views/FormHistorico.vue'
 Vue.use(VueRouter)
 
 const routes: Array<RouteConfig> = [
@@ -21,20 +19,16 @@ const routes: Array<RouteConfig> = [
     component: FormCadastro
   },
   {
-    path: '/filmes/:id',
-    name: 'filmes',
-    component: Filmes
+    path: '/fotos',
+    name: 'fotos',
+    component: GridFotos
   },
   {
-    path: '/planos/:id',
-    name: 'planos',
-    component: FormPlanos
-  },
-  {
-    path: '/historico/:id',
-    name: 'historico',
-    component: FormHistorico
+    path: '/home',
+    name: 'home',
+    component: Home
   }
+  
 ]
 
 const router = new VueRouter({

@@ -4,6 +4,7 @@ import FormLogin from '../views/FormLogin.vue'
 import FormCadastro from '../views/FormCadastro.vue'
 import Home from '../views/Home.vue'
 import GridFotos from '../views/GridFotos.vue'
+import Agendamento from '../components/Agendamento.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes: Array<RouteConfig> = [
     path: '/home',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/agendamento',
+    name: 'agendamento',
+    component: Agendamento
   }
   
 ]

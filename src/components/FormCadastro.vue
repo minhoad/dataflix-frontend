@@ -6,18 +6,84 @@
       <v-card class="mx-auto my-12" max-width="500">
         <v-row class="mx-auto">
           <v-col>
-            <v-text-field v-model="user.nome" :rules="usuarioRules" :counter="50" label="Usuário*" required>
+            <v-text-field v-model="cadastro.nome" :rules="nomeRules" :counter="50" label="Nome" required>
             </v-text-field>
           </v-col>
         </v-row>
         <v-row class="mx-auto">
           <v-col>
-            <v-text-field v-model="user.senha" :rules="senhaRules" label="Senha*" required></v-text-field>
+            <v-text-field v-model="cadastro.senha" :rules="mandatoryRules" label="Senha" required></v-text-field>
           </v-col>
         </v-row>
         <v-row class="mx-auto">
           <v-col>
-            <v-text-field class="" v-model="user.email" :rules="emailRules" label="E-mail*" required></v-text-field>
+            <v-text-field class="" v-model="cadastro.email" :rules="mandatoryRules" label="E-mail" required></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="mx-auto">
+          <v-col>
+            <v-text-field class="" v-model="cadastro.telefone" :rules="mandatoryRules" label="Telefone" placeholder="(xx)99999-9999" required></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="mx-auto">
+          <v-col>
+            <v-text-field class="" v-model="cadastro.cep" :rules="mandatoryRules" label="CEP" placeholder="33333-333" required></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="mx-auto">
+          <v-col>
+            <v-text-field class="" v-model="cadastro.logradouro" :rules="mandatoryRules" label="Logradouro"
+              required></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="mx-auto">
+          <v-col>
+            <v-text-field class="" v-model="cadastro.bairro" :rules="mandatoryRules" label="Bairro" required></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="mx-auto">
+          <v-col>
+            <v-text-field class="" v-model="cadastro.cidade" :rules="mandatoryRules" label="Cidade" required></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="mx-auto">
+          <v-col>
+            <v-text-field class="" v-model="cadastro.estado" :rules="mandatoryRules" label="Estado" placeholder="MG" required></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="mx-auto">
+          <v-col>
+            <v-text-field class="" v-model="cadastro.inicio" :rules="mandatoryRules" label="Início de contrato" placeholder="DD/MM/AAAA"
+              required></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="mx-auto">
+          <v-col>
+            <v-text-field class="" v-model="cadastro.salario" :rules="mandatoryRules" label="Salário" placeholder="R$xxxx,xx"
+              required></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row class="ml-3">
+            <v-checkbox
+              color="primary"
+            >
+              <template v-slot:label>
+                <div @click.stop="">
+                  Médico
+                </div>
+              </template>
+            </v-checkbox>
+          </v-row>
+          <v-row class="mx-auto">
+                    <v-col>
+                        <v-select :items="especialidades" label="Especialidade médica">
+                        </v-select>
+                    </v-col>
+                </v-row>
+        <v-row class="mx-auto">
+          <v-col>
+            <v-text-field class="" v-model="cadastro.salario" :rules="mandatoryRules" label="CRM" placeholder="123456-MG"
+              required></v-text-field>
           </v-col>
         </v-row>
         <v-row>
@@ -32,18 +98,11 @@
         </v-row>
       </v-card>
     </v-form>
-    <v-snackbar
-      v-model="snackbar"
-    >
+    <v-snackbar v-model="snackbar">
       {{ text }}
 
       <template v-slot:action="{ attrs }">
-        <v-btn
-          color="pink"
-          text
-          v-bind="attrs"
-          @click="snackbar = false"
-        >
+        <v-btn color="pink" text v-bind="attrs" @click="snackbar = false">
           Close
         </v-btn>
       </template>
@@ -62,16 +121,17 @@ export default Vue.extend({
     DataflixApp
   },
   data: () => ({
-    urlCadastro: 'http://localhost:8080/api/usuario/',
+    especialidades: ["Cardiologia", "Neurologia", "Oncologia", "Homeopatia"],
+    urlCadastro: 'http://localhost:8080/api/cadastro/',
     valid: false,
-    user: {nome: '', senha: '', email: ''},
+    cadastro: { nome: '', email: '', senha: '', telefone: '', cep: '', logradouro: '', cidade: '', estado: '', bairro: '', inicio: '', salario: '' },
     retorno: {},
-    usuarioRules: [
-      (v: any) => !!v || 'Usuário é obrigatório',
-      (v: string | any[]) => v.length <= 50 || 'Usuário deve conter no máximo 50 caracteres',
+    nomeRules: [
+      (v: any) => !!v || 'Nome é obrigatório',
+      (v: string | any[]) => v.length <= 50 || 'Nome deve conter no máximo 50 caracteres',
     ],
-    senhaRules: [
-      (v: any) => !!v || 'Senha é obrigatório',
+    mandatoryRules: [
+      (v: any) => !!v || 'É obrigatório',
     ],
     emailRules: [
       (v: any) => !!v || 'E-mail é obrigatório',
@@ -79,7 +139,7 @@ export default Vue.extend({
     ],
     snackbar: false,
     text: '',
-    usuarioRetorno: {
+    cadastroRetorno: {
       nome: "",
       email: "",
       senha: "",
@@ -89,26 +149,25 @@ export default Vue.extend({
   }),
   methods: {
     clear() {
-      this.user.email = ''
-      this.user.nome = ''
-      this.user.senha = ''
+      this.cadastro.nome = '', this.cadastro.email = '', this.cadastro.senha = '', this.cadastro.telefone = '', this.cadastro.cep = '', this.cadastro.logradouro = '',
+      this.cadastro.cidade = '', this.cadastro.estado = '', this.cadastro.bairro = '', this.cadastro.inicio = '', this.cadastro.salario = ''
     },
     retornar() {
-      this.$router.push('/login')
+      this.$router.push('/home')
     },
     register() {
       axios
-      .post(this.urlCadastro, this.user)
-      .then((res) => {
-           this.usuarioRetorno = res.data;
-           this.text = 'Usuário criado com sucesso!';
-           this.snackbar = true;
-           this.$router.push('/login')
-         }).catch((error) => {
+        .post(this.urlCadastro, this.cadastro)
+        .then((res) => {
+          this.cadastroRetorno = res.data;
+          this.text = 'Cadastro feito com sucesso!';
+          this.snackbar = true;
+          this.$router.push('/home')
+        }).catch((error) => {
           this.text = 'Erro ao realizar cadastro!';
           this.snackbar = true;
           console.log(error);
-         });
+        });
     }
   }
 

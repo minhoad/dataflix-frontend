@@ -6,20 +6,43 @@
             <v-card class="mx-auto my-12" max-width="500">
                 <v-row class="mx-auto">
                     <v-col>
-                        <v-time-picker ampm-in-title format="ampm" full-width required>
+                        <v-alert color="primary">
+                            Escolha a data:
+                        </v-alert>
+                        <v-date-picker v-model="picker" full-width></v-date-picker>
+                    </v-col>
+                </v-row>
+                <v-row class="mx-auto">
+                    <v-col>
+                        <v-alert color="primary">
+                            Escolha o horário:
+                        </v-alert>
+                        <v-time-picker ampm-in-title format="ampm" full-width required label="Escolha o horário">
                         </v-time-picker>
                     </v-col>
                 </v-row>
                 <v-row class="mx-auto">
                     <v-col>
-                        <v-select :items="items" label="Escolha o Médico">
+                        <v-alert class="mx-auto" color="primary">
+                            Escolha a especialidade médica:
+                        </v-alert>
+                        <v-select :items="especialidades" label="Selecione">
+                        </v-select>
+                    </v-col>
+                </v-row>
+                <v-row class="mx-auto">
+                    <v-col>
+                        <v-alert class="mx-auto" color="primary">
+                            Escolha o médico especialista:
+                        </v-alert>
+                        <v-select :items="medicos" label="Selecione">
                         </v-select>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col class="text-center">
                         <v-btn class="mr-auto" color="primary" elevation="2" large raised @click="register">
-                            Cadastrar
+                            Agendar
                         </v-btn>
                         <v-btn class="mx-auto ml-7" type="button" variant="outline-secondary" large @click="retornar">
                             Retornar
@@ -51,10 +74,11 @@ export default Vue.extend({
         DataflixApp
     },
     data: () => ({
-        urlCadastro: 'http://localhost:8080/api/usuario/',
+        urlCadastro: 'http://localhost:8080/api/agendamento/',
         valid: false,
         user: { nome: '', senha: '', email: '' },
-        items: [ "Dr. Pica Seca", "Dr. Onésio Cu de Mel", "Dr. Paulin Delícia" ],
+        medicos: ["Dr. Nasser Rafael", "Dr. Darmes Araújo", "Dr. Eduardo Campos"],
+        especialidades: ["Cardiologia", "Neurologia", "Oncologia", "Homeopatia"],
         retorno: {},
         snackbar: false,
         text: '',
@@ -73,7 +97,7 @@ export default Vue.extend({
             this.user.senha = ''
         },
         retornar() {
-            this.$router.push('/login')
+            this.$router.push('/home')
         },
         register() {
             axios
@@ -82,7 +106,7 @@ export default Vue.extend({
                     this.usuarioRetorno = res.data;
                     this.text = 'Agendamento feito com sucesso!';
                     this.snackbar = true;
-                    this.$router.push('/login')
+                    this.$router.push('/home')
                 }).catch((error) => {
                     this.text = 'Erro ao realizar agendamento!';
                     this.snackbar = true;

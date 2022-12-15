@@ -53,7 +53,18 @@
               <v-icon>mdi-key</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>Cadastro</v-list-item-title>
+              <v-list-item-title>Cadastro Funcionário</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-btn>
+
+        <v-btn depressed :to="'/cadastropaciente/'">
+          <v-list-item>
+            <v-list-item-icon grid>
+              <v-icon>mdi-key</v-icon>
+            </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>Cadastro Paciente</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-btn>

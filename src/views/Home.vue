@@ -4,8 +4,8 @@
       <div class="main-container">
       </div>
       <div>
-        <v-row justify="center" width="80%">
-            <v-expansion-panels accordion>
+        <v-row class="px-12 mx-auto">
+            <v-expansion-panels>
                 <v-expansion-panel>
                     <v-expansion-panel-header>Quem somos</v-expansion-panel-header>
                     <v-expansion-panel-content>
@@ -21,7 +21,7 @@
                 <v-expansion-panel>
                     <v-expansion-panel-header>Nossa missão</v-expansion-panel-header>
                     <v-expansion-panel-content>
-                        A clínica foi criada pelo médico Nasser, especializado em Omeopatia, ele tinha o intuito de introduzir no Brasil essa ciência, subestimada por muitos.
+                        A clínica foi criada pelos doutores Darmes Dias e Nasser Rafael, especializados em Omeopatia, ele tinha o intuito de introduzir no Brasil essa ciência, subestimada por muitos.
                     </v-expansion-panel-content>
                 </v-expansion-panel>
             </v-expansion-panels>
